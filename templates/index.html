@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <form action="/" method="post">
+
+        <h1>
+          Your table
+        </h1>
+
+        <table action="/sheet" class="table table-dark" method="GET" id="table2">
+          <thead>
+            <tr>
+              <th scope="col">You</th>
+              <th scope="col">Username</th>
+              <th scope="col">Table</th>
+            </tr>
+          </thead>
+          {% for user in you %}
+          <tbody>
+              <td>{{ user["fullname"] }}</td>
+              <td>{{ user["username"] }}</td>
+              <td>{{ user["tab"] }}</td>
+          </tbody>
+          {% endfor %}
+        </table>
+
+        <button class="btn btn-primary" name="b1" type="submit" value="1">Leave Annenberg</button>
+
+        <h1>
+          Friends in Annenberg
+        </h1>
+
+        <table action="/sheet" class="table table-dark" method="GET" id="table">
+          <thead>
+            <tr>
+              <th scope="col">Username</th>
+              <th scope="col">Name</th>
+              <th scope="col">Table</th>
+            </tr>
+          </thead>
+          {% for user in users %}
+          <tbody>
+              <td>{{ user["username"] }}</td>
+              <td>{{ user["fullname"] }}</td>
+              <td>{{ user["tab"] }}</td>
+          </tbody>
+          {% endfor %}
+        </table>
+
+
+    </form>
+
+
+{% endblock %}

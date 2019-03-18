@@ -1,0 +1,15 @@
+
+{% extends "login.html" %}
+
+{% block title %}
+    Enter Table
+{% endblock %}
+
+{% block main %}
+    <form action="/buy" method="post">
+        <div class="form-group">
+            <input class="form-control" name="table" placeholder="Table Number" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Enter</button>
+    </form>
+{% endblock %}

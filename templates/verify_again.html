@@ -1,0 +1,18 @@
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Verify Again
+{% endblock %}
+
+{% block main %}
+    The verification code or email is incorrect. Or you're trying to register with the same email more than once.
+
+    <br/>
+
+    <form action="/verifyAgain" method="post">
+        <button class="btn btn-primary" type="submit">Verify Again</button>
+    </form>
+
+
+{% endblock %}

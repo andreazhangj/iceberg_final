@@ -1,0 +1,19 @@
+
+{% extends "login.html" %}
+
+{% block title %}
+    Add Friend
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="form-group">
+            <input class="form-control" name="friendname" placeholder="Friend's Username" type="text">
+        </div>
+        {% for stock in sumStocks %}
+            <option value={{ stock["symbol"] }}>{{ stock["symbol"] }}</option>
+        {% endfor %}
+        </select>
+        <button class="btn btn-primary" type="submit">Add Friend</button>
+    </form>
+{% endblock %}
