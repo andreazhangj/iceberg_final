@@ -50,4 +50,3 @@ each friend to see the other's location.
 * and a couple of possible implementations) for writing the email
 * verification part of our application (here's the link:
 * https://stackoverflow.com/questions/64505/sending-mail-from-python-using-smtp)
-*
