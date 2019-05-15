@@ -47,51 +47,51 @@ db = SQL("sqlite:///finance.db")
 def index():
     # Show list of users' table numbers
     if request.method == "GET":
-        # Checks if the user's time difference is less than 30 min, if not delete the table
-        time = db.execute("SELECT CURRENT_TIME")
-        time1 = int(time[0]["CURRENT_TIME"].replace(":", ""))
-        oldTime = db.execute("SELECT time FROM users WHERE id = :id", id=session["user_id"])
-        if oldTime[0]["time"] is not None:
-            oldTime = int(oldTime[0]["time"].replace(":", ""))
-            if ((time1 / 10000) % 10) != ((oldTime / 10000) % 10):
-                if time1 - oldTime > 7000:
-                    db.execute("UPDATE users SET tab = NULL, time = NULL WHERE id = :id", id=session["user_id"])
-            else:
-                if time1 - oldTime > 3000:
-                    db.execute("UPDATE users SET tab = NULL, time = NULL WHERE id = :id", id=session["user_id"])
+        # # Checks if the user's time difference is less than 30 min, if not delete the table
+        # time = db.execute("SELECT CURRENT_TIME")
+        # time1 = int(time[0]["CURRENT_TIME"].replace(":", ""))
+        # oldTime = db.execute("SELECT time FROM users WHERE id = :id", id=session["user_id"])
+        # if oldTime[0]["time"] is not None:
+        #     oldTime = int(oldTime[0]["time"].replace(":", ""))
+        #     if ((time1 / 10000) % 10) != ((oldTime / 10000) % 10):
+        #         if time1 - oldTime > 7000:
+        #             db.execute("UPDATE users SET tab = NULL, time = NULL WHERE id = :id", id=session["user_id"])
+        #     else:
+        #         if time1 - oldTime > 3000:
+        #             db.execute("UPDATE users SET tab = NULL, time = NULL WHERE id = :id", id=session["user_id"])
 
-        # Create list of friends
-        friends = []
-        other = db.execute("SELECT * FROM friends WHERE userid1 = :userID", userID=session["user_id"])
-        for elem in other:
-            friends.append(elem["userid2"])
-        other2 = db.execute("SELECT * FROM friends WHERE userid2 = :userID", userID=session["user_id"])
-        for elem in other2:
-            friends.append(elem["userid1"])
-        users = []
-        for num in friends:
-            temp = db.execute("SELECT * FROM users WHERE id = :userID", userID=num)
-            if temp[0]["tab"] is not None:
-                users.append(temp[0])
+        # # Create list of friends
+        # friends = []
+        # other = db.execute("SELECT * FROM friends WHERE userid1 = :userID", userID=session["user_id"])
+        # for elem in other:
+        #     friends.append(elem["userid2"])
+        # other2 = db.execute("SELECT * FROM friends WHERE userid2 = :userID", userID=session["user_id"])
+        # for elem in other2:
+        #     friends.append(elem["userid1"])
+        # users = []
+        # for num in friends:
+        #     temp = db.execute("SELECT * FROM users WHERE id = :userID", userID=num)
+        #     if temp[0]["tab"] is not None:
+        #         users.append(temp[0])
 
-        # Checks if the user's time difference is less than 30 min, if not delete the table
-        for user in users:
-            oldTime = db.execute("SELECT time FROM users WHERE id = :id", id=user["id"])
-            if oldTime[0]["time"] is not None:
-                oldTime = int(oldTime[0]["time"].replace(":", ""))
-                if ((time1 / 10000) % 10) != ((oldTime / 10000) % 10):
-                    if time1 - oldTime > 7000:
-                        db.execute("UPDATE users SET tab = NULL, time = NULL WHERE id = :id", id=user["id"])
-                else:
-                    if time1 - oldTime > 3000:
-                        db.execute("UPDATE users SET tab = NULL, time = NULL WHERE id = :id", id=user["id"])
+        # # Checks if the user's time difference is less than 30 min, if not delete the table
+        # for user in users:
+        #     oldTime = db.execute("SELECT time FROM users WHERE id = :id", id=user["id"])
+        #     if oldTime[0]["time"] is not None:
+        #         oldTime = int(oldTime[0]["time"].replace(":", ""))
+        #         if ((time1 / 10000) % 10) != ((oldTime / 10000) % 10):
+        #             if time1 - oldTime > 7000:
+        #                 db.execute("UPDATE users SET tab = NULL, time = NULL WHERE id = :id", id=user["id"])
+        #         else:
+        #             if time1 - oldTime > 3000:
+        #                 db.execute("UPDATE users SET tab = NULL, time = NULL WHERE id = :id", id=user["id"])
 
-        # Create list of friends in Annenberg at the moment
-        usersReal = []
-        for num in friends:
-            temp = db.execute("SELECT * FROM users WHERE id = :userID", userID=num)
-            if temp[0]["tab"] is not None:
-                usersReal.append(temp[0])
+        # # Create list of friends in Annenberg at the moment
+        # usersReal = []
+        # for num in friends:
+        #     temp = db.execute("SELECT * FROM users WHERE id = :userID", userID=num)
+        #     if temp[0]["tab"] is not None:
+        #         usersReal.append(temp[0])
 
         # Get all the information about the user himself
         you = db.execute("SELECT * FROM users WHERE id = :id", id=session["user_id"])
